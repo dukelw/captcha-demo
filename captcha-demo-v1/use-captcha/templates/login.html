@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Secure Login</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background-color: #099250;
+        margin-top: 50px;
+      }
+      .login-container {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+        display: inline-block;
+        text-align: left;
+        width: 350px;
+      }
+      h1 {
+        color: #ffffff;
+        font-size: 32px;
+      }
+      h2 {
+        color: #333;
+      }
+      input {
+        width: 93%;
+        padding: 10px;
+        margin: 8px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+      }
+      button {
+        width: 100%;
+        padding: 12px;
+        background: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+      button:hover {
+        background: #0056b3;
+      }
+      .captcha-container {
+        text-align: center;
+        margin-top: 15px;
+      }
+      img {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>SECURE LOGIN</h1>
+    <div class="login-container">
+      <h2>🔓 Login</h2>
+      <form method="POST" action="http://127.0.0.1:5000/">
+        <label>Username</label>
+        <input type="text" name="username" required />
+
+        <label>Password</label>
+        <input type="password" name="password" required />
+
+        <div class="captcha-container">
+          <p>Enter the text in the image:</p>
+          <img
+            src="{{ url_for('static', filename='images/' + captcha_image) }}"
+            alt="CAPTCHA"
+          />
+          <input type="text" name="captcha" required />
+        </div>
+
+        <button type="submit">Login</button>
+      </form>
+      {% if message %}
+      <p style="color: red">{{ message }}</p>
+      {% endif %}
+    </div>
+  </body>
+</html>
